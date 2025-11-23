@@ -1,9 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clon X</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <div class="layaut-wrapper">
@@ -54,36 +56,40 @@
                 </div>
             </form>
             <section class="posts">
+                {% for post in posts %}
                 <article class="post">
                     <div class="profile-time">
-                        <img src="" alt="">
-                        <h3>Sarah Dev</h3>
-                        <small>@sarahcodes</small>
-                        <small>2h</small>
+                        {% if post.user.image_profile %}
+                            <img src="{{post.user.image_profile.url}}" alt="Image to user">
+                        {% endif %}
+                        <p>{{post.user.name}}</p>
+                        <small>{{post.user.username}}</small>
+                        <small>{{post.past_tense}}</small>
                     </div>
                     <div class="content-post">
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione, adipisci!</p>
+                        {{post.content}}
                         <img src="" alt="">
                     </div>
                     <div class="interactions">
                         <div class="comment">
                             <i></i>
-                            <p>24</p>
+                            <p>{{post.coments}}</p>
                         </div>
                         <div class="retweet">
                             <i></i>
-                            <p>5</p>
+                            <p>{{post.shares}}</p>
                         </div>
                         <div class="like">
                             <i></i>
-                            <p>142</p>
+                            <p>{{post.likes}}</p>
                         </div>
                         <div class="views">
                             <i></i>
-                            <p>1,2k</p>
+                            <p>{{post.views}}</p>
                         </div>
                     </div>
                 </article>
+                {% endfor %}
             </section>
         </main>
         <aside>
